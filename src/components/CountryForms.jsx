@@ -2,27 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const CountryForms = () => {
-    const { country } = useParams(); // Get the country name from the URL
+    const { country } = useParams(); // Extracts the country name from the URL
     const [forms, setForms] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/forms/country/${country}`) // Ensure the correct backend URL
+        // Fetches submissions for the selected country from the backend
+        fetch(`http://localhost:3000/api/forms/country/${country}`)
             .then((response) => {
-                if (!response.ok) {
+                if (!response.ok) {K
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                return response.json();
+                return response.json(); // Parses the JSON response from the backend
             })
             .then((data) => {
-                setForms(data);
+                setForms(data); // Updates the state with the fetched submissions
                 setLoading(false);
             })
             .catch((error) => {
-                console.error('Error fetching forms:', error);
+                console.error('Error fetching forms:', error); 
                 setLoading(false);
             });
-    }, [country]);
+    }, [country]); // Runs the effect whenever the country changes
 
     if (loading) {
         return <div className="text-center py-16">Loading...</div>;

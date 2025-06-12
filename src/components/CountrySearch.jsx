@@ -42,10 +42,12 @@ const CountrySearch = () => {
                     <a href="#" className="text-[#263238] hover:text-[#4caf4f] transition-colors">
                         Home
                     </a>
-                    <a href="#" className="text-[#717171] hover:text-[#4caf4f] transition-colors">
-                        Explore
+                    <a href="#" className="text-[#717171] hover:text-[#4caf4f] transition-colors">  
+                        Forms
                     </a>
-                </nav>
+                    <a href="#" className="text-[#717171] hover:text-[#4caf4f] transition-colors">
+                        About
+                    </a></nav>
             </header>
 
             {/* Hero Section */}
@@ -53,7 +55,7 @@ const CountrySearch = () => {
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
                     <div className="space-y-6">
                         <h1 className="text-4xl lg:text-5xl font-bold text-[#263238] leading-tight">
-                            Discover and track <span className="text-[#4caf4f]">every country</span>
+                            Discover and track your <span className="text-[#4caf4f]">favorite country</span>
                         </h1>
                         <p className="text-[#717171] text-lg">
                             Search live country data, save your favorites, and share your travel experiences. Connect
