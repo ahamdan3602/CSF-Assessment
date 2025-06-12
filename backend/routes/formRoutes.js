@@ -35,11 +35,22 @@ router.get(`/:id`, async (req, res) => {
 })
 
 // POST route to handle form submission
-router.post('/', (req, res)=> {
-    const formData = req.body;
-    console.log('Received form data:', formData);
-    res.status(200).json({ message: 'Form received', data: formData });
-})
+router.post('/', async (req, res) => {
+    const { country, reason, visited } = req.body; // Extract form data
+    try {
+        const newFormSubmission = await prisma.formSubmission.create({
+            data: {
+                country,
+                reason,
+                visited,
+            },
+        });
+        res.status(201).json({ message: 'Form submitted successfully', data: newFormSubmission });
+    } catch (error) {
+        console.error('Error saving form data:', error);
+        res.status(500).json({ error: 'Failed to save form data' });
+    }
+});
 
 
 module.exports = router;
