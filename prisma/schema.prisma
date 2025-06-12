@@ -3,7 +3,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -11,11 +10,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model FormSubmission {
-  id        Int @id   @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   country   String
   reason    String
   visited   Boolean
-  createdAt DateTime  @default(now())
+  createdAt DateTime @default(now())
 }

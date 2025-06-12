@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import FormComponent from './FormComponent';
 
 const CountrySearch = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [countries, setCountries] = useState([]);
+    const [formData, setFormData] = useState({
+        country: '',
+        reason: '',
+        visited: false,
+    });
 
     useEffect(() => {
         // Fetch countries dynamically from the API
@@ -14,9 +21,11 @@ const CountrySearch = () => {
             .catch((error) => console.error('Error fetching countries:', error));
     }, []);
 
-    const filteredCountries = countries.filter((country) =>
-        country?.name?.common?.toLowerCase().includes(searchQuery.toLowerCase())
-    ).slice(0,10);
+    const filteredCountries = countries
+        .filter((country) =>
+            country?.name?.common?.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .slice(0, 12);
 
     return (
         <div className="bg-gray-100 min-h-screen">
@@ -34,13 +43,13 @@ const CountrySearch = () => {
                         Home
                     </a>
                     <a href="#" className="text-[#717171] hover:text-[#4caf4f] transition-colors">
-                        Form
+                        Explore
                     </a>
                 </nav>
             </header>
 
             {/* Hero Section */}
-            <section className="py-16 px-4 lg:px-6">
+            <section className="py-16 px-4 lg:px-6 h-screen">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
                     <div className="space-y-6">
                         <h1 className="text-4xl lg:text-5xl font-bold text-[#263238] leading-tight">
@@ -71,12 +80,21 @@ const CountrySearch = () => {
                                         key={index}
                                         className="text-[#263238] bg-white px-4 py-2 rounded shadow-sm hover:bg-[#f1f1f1] transition"
                                     >
-                                        {country.name.common}
+                                        <Link to={`/country/${country.name.common}`} className="hover:text-[#4caf4f]">
+                                            {country.name.common}
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            {/* Form Section */}
+            <section className="">
+                <div className="max-w-7xl mx-auto">
+                    <FormComponent formData={formData} setFormData={setFormData} />
                 </div>
             </section>
         </div>

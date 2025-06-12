@@ -14,14 +14,20 @@ const FormComponent = ({ formData, setFormData }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevent page reload
-        fetch('/api/forms', {
+        console.log('Submitting form data:', formData); // Debugging log
+        fetch('http://localhost:3000/api/forms', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(formData),
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then((data) => {
                 console.log('Form submitted successfully:', data);
                 alert('Form submitted successfully!');
@@ -45,7 +51,7 @@ const FormComponent = ({ formData, setFormData }) => {
                                 name="countries"
                                 id="countries"
                                 value={formData.country}
-                                onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                                onChange={(e) => setFormData({ ...formData, country: e.target.value, dreamCountry: e.target.value })}
                                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#4caf4f]"
                             >
                                 <option value="">Select a country</option>
@@ -60,14 +66,14 @@ const FormComponent = ({ formData, setFormData }) => {
                         </div>
 
                         <div>
-                            <label htmlFor="dreamCountry" className="block text-[#263238] font-medium mb-2">
+                            <label htmlFor="reason" className="block text-[#263238] font-medium mb-2">
                                 Reason:
                             </label>
                             <textarea
-                                id="dreamCountry"
-                                name="dreamCountry"
-                                value={formData.dreamCountry || ''}
-                                onChange={(e) => setFormData({ ...formData, dreamCountry: e.target.value })}
+                                id="reason"
+                                name="reason"
+                                value={formData.reason}
+                                onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
                                 className="w-full px-4 py-2 border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-[#4caf4f]"
                                 rows="5"
                             />

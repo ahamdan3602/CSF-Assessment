@@ -1,16 +1,17 @@
-import { useState } from 'react'
-import FormComponent from './components/FormComponent.jsx'
-import CountrySearch from './components/CountrySearch.jsx'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import CountrySearch from './components/CountrySearch';
+import CountryForms from './components/CountryForms';
 
-function App() {
-  const [formData, setFormData] = useState({ country: '' })
-
-  return (
-    <div>
-      <CountrySearch />
-      <FormComponent formData={formData} setFormData={setFormData} />
-    </div>
-  )
-}
+const App = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<CountrySearch />} />
+                <Route path="/country/:country" element={<CountryForms />} />
+            </Routes>
+        </Router>
+    );
+};
 
 export default App;
