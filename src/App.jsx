@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import FormComponent from './components/FormComponent.jsx'
+import CountrySearch from './components/CountrySearch.jsx'
 
 function App() {
   const [formData, setFormData] = useState({ country: '' })
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-center my-4">Country Form</h1>
+      <CountrySearch />
       <FormComponent formData={formData} setFormData={setFormData} />
     </div>
   )
