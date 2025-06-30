@@ -1,4 +1,4 @@
-# CSF-Assessment
+# CSF
 
 This project is a full-stack web application that allows users to:
 
